@@ -1,26 +1,27 @@
 /**
- * @param {number} num
+ * @param {string[]} strs
  * @return {string}
  */
-// Day-02  challenge-01
-// convert number into Roman
-var intToRoman = function(num) {
+// day-01 challenge-01
+var longestCommonPrefix = function(strs) {
+    
+    if (strs.length==0) {
+        return "";
+    }
 
-    
-    const symbols = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"];
-    const values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
-    
-    let result = "";
-    
-    for (let i = 0; i < symbols.length; i++) {
-        while (num >= values[i]) {
-            result += symbols[i];
-            num -= values[i];
+    let word = strs[0];
+
+    for (let i = 1; i < strs.length; i++) {
+        while (strs[i].indexOf(word) !== 0) {
+            word = word.slice(0, word.length - 1);
+            if (word === "") {
+                return "";
+            }
         }
     }
-    
-    return result;
+
+    return word;
 }
-console.log(intToRoman(3));     
-console.log(intToRoman(58));    
-console.log(intToRoman(1994)); 
+
+console.log(longestCommonPrefix(["flower","flow","flight"])); 
+console.log(longestCommonPrefix(["dog","racecar","car"]));      
